@@ -1,104 +1,236 @@
-/* CSS Variables for Theme Management */
+/* ===== Theme Colors ===== */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --color-primary: #1565c0;    /* deep blue */
+  --color-secondary: #fbc02d;  /* gold */
+  --color-accent: #d32f2f;     /* red */
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-text: #222;
+  --color-label: #666;
+  --color-border: #e0e0e0;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+body,
+.ttt-app {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
 }
 
-.App {
+.app-title {
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-top: 4vh;
+  letter-spacing: 1px;
+}
+
+.player-info {
+  margin: 24px 0 12px 0;
   text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 1.1rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.player-label {
+  font-weight: 600;
+  font-size: 1.07em;
+  padding: 0 3px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.status {
+  font-size: 1.18rem;
+  margin-bottom: 10px;
+  min-height: 27px;
+  font-weight: 500;
+  color: var(--color-accent);
 }
 
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.game-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.board {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 0;
+  box-shadow: 0 3px 16px 1px rgba(60,86,129,0.09);
+  background: var(--color-bg-secondary);
+  padding: 24px 18px;
+  border-radius: 18px;
+}
+
+.board-row {
+  display: flex;
+}
+
+.square {
+  width: 65px;
+  height: 65px;
+  border: 2px solid var(--color-border);
+  background: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  border-radius: 8px;
+  outline: none;
+  margin: 3px;
+  transition: background 0.18s, border 0.18s;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(45,54,72,0.07);
+}
+.square:hover:enabled {
+  background: var(--color-secondary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.square[aria-label="empty cell"] {
+  color: var(--color-label);
+}
+
+.controls {
+  margin: 18px 0 5px 0;
+  display: flex;
+  gap: 18px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+.btn {
+  padding: 9px 20px;
+  background: var(--color-primary);
+  color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 4px;
+  transition: background 0.21s, transform 0.18s;
+  box-shadow: 0px 2.5px 8px -2px rgba(35,63,139,0.07);
+}
+.btn:hover,
+.btn:focus {
+  background: var(--color-accent);
+  color: #fff;
+  outline: none;
+  transform: translateY(-2px) scale(1.03);
+}
+.btn:active {
+  transform: translateY(1px);
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.btn.secondary {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+}
+.btn.secondary:hover {
+  background: var(--color-accent);
+  color: #fff;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.btn.small {
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  border-radius: 6px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.names-edit {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.player-input {
+  padding: 5px 8px;
+  font-size: 1em;
+  border: 1.2px solid var(--color-border);
+  border-radius: 5px;
+  margin: 0 5px;
+  max-width: 102px;
+  background: #fafbfc;
+  color: var(--color-text);
+}
+
+.history {
+  margin: 15px auto 0 auto;
+  max-width: 270px;
+  text-align: center;
+  background: rgba(213,47,47,0.025);
+  padding: 14px 10px 10px 10px;
+  border-radius: 10px;
+  border: 1.2px dashed var(--color-border);
+  box-sizing: border-box;
+}
+.history-title {
+  text-transform: uppercase;
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.6px;
+  margin-bottom: 3px;
+}
+.history ol {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.history-btn {
+  padding: 5px 11px;
+  margin: 4px 0;
+  font-size: 0.95rem;
+  background: var(--color-bg-secondary);
+  border: 1.2px solid var(--color-border);
+  color: var(--color-text);
+}
+.history-btn.current, .history-btn:focus {
+  background: var(--color-secondary);
+  color: #383838;
+  border-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.footer {
+  text-align: center;
+  color: #adadad;
+  font-size: 0.87em;
+  margin: 35px 0 6px 0;
+}
+
+@media (max-width: 600px) {
+  .app-title {
+    font-size: 1.45rem;
   }
-  to {
-    transform: rotate(360deg);
+  .board {
+    padding: 12px 5px;
+  }
+  .square {
+    width: 38px;
+    height: 38px;
+    font-size: 1.37rem;
+    margin: 2px;
+  }
+  .controls {
+    gap: 10px;
+    font-size: 0.92rem;
+  }
+  .footer {
+    font-size: 0.76em;
+    margin-bottom: 5px;
+  }
+  .history {
+    max-width: 98vw;
+    padding: 2vw 0.8vw;
   }
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
-}
+::-webkit-input-placeholder { color: #bbb; }
+::-moz-placeholder { color: #bbb; }
+:-ms-input-placeholder { color: #bbb; }
+::placeholder { color: #bbb; }
